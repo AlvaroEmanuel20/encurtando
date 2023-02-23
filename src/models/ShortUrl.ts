@@ -7,7 +7,7 @@ export const ShortUrl = model(
         shortId: {
             type: String,
             required: true,
-            default: shortid.generate(),
+            default: shortid.generate,
         },
         originalUrl: {
             type: String,
