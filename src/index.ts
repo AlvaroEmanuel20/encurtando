@@ -9,25 +9,30 @@ const database = new Database();
 const PORT = process.env.PORT || 8000;
 
 database.connect();
-app.use(cors());
+app.use(
+    cors({
+        origin: process.env.APP_FRONT_URL,
+    })
+);
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
-	try {
-		res.json({
+    try {
+        res.json({
             app: "Encurtando 👋",
             msg: "Welcome to URL Shortener Encurtando.",
         });
-	} catch (error) {
-		res.status(500).json({
-			msg: "Internal server error",
-			error,
-		});
-	}
+    } catch (error) {
+        res.status(500).json({
+            msg: "Internal server error",
+            error,
+        });
+    }
 });
 
 app.use("/", router);
 
 app.listen(PORT, () => {
-	console.log(`Server running in ${process.env.APP_URL} 👋`);
+    console.log(`Server running in ${process.env.APP_URL} 👋`);
 });
